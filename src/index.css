@@ -11,3 +11,83 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* ////////////////////////////////// */
+h2 {
+  margin: 0;
+}
+
+#main {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+
+.header {
+  padding: 15px;
+  border-bottom: 2px solid #282A35;
+}
+
+.header img {
+  width: 220px;
+}
+
+#sidebar {
+  background-color: #282A35;
+  height: calc(100vh - 70px);
+
+}
+
+#sidebar {
+  list-style: none;
+
+}
+
+#sidebar a {
+  color: #fff;
+  font-size: 18px;
+  text-decoration: none;
+  padding: 12px 15px;
+  display: block;
+  border-bottom: 1px solid #fff;
+}
+
+#sidebar a.active {
+  background-color: #2e4c1e;
+  color: #fff;
+}
+
+
+
+.main-content {
+  padding-left: 12px;
+}
+
+.main-content {
+  padding: 0;
+}
+
+.main-content {
+  padding-left: 12px;
+}
+
+.main-content ul::-webkit-scrollbar {
+  display: none;
+}
+
+.main-content ul {
+  padding: 0;
+  height: 422px;
+  overflow-y: scroll;
+
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.main-content ul li {
+  list-style: none;
+  border-bottom: 1px solid #ccc;
+  font-size: 18px;
+  padding: 12px 0;
+}
