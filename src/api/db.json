@@ -1,0 +1,27 @@
+{
+    "users": [
+      {"id": 1, "name": "John Doe", "email": "john@example.com", "dateJoined": "2023-10-20"},
+      {"id": 2, "name": "Jane Doe", "email": "jane@example.com", "dateJoined": "2023-10-21"},
+      {"id": 3, "name": "Bob Smith", "email": "bob@example.com", "dateJoined": "2023-10-22"},
+      {"id": 4, "name": "Alice Johnson", "email": "alice@example.com", "dateJoined": "2023-10-23"},
+      {"id": 5, "name": "Eve Jackson", "email": "eve@example.com", "dateJoined": "2023-10-24"},
+      {"id": 6, "name": "Charlie Brown", "email": "charlie@example.com", "dateJoined": "2023-10-25"},
+      {"id": 7, "name": "Olivia Davis", "email": "olivia@example.com", "dateJoined": "2023-10-26"},
+      {"id": 8, "name": "Liam Wilson", "email": "liam@example.com", "dateJoined": "2023-10-27"},
+      {"id": 9, "name": "Emma Lee", "email": "emma@example.com", "dateJoined": "2023-10-28"},
+      {"id": 10, "name": "James Kim", "email": "james@example.com", "dateJoined": "2023-10-29"}
+    ],
+    "reports": [
+      {"id": 1, "userId": 1, "title": "Report 1", "content": "Lorem ipsum", "dateCreated": "2023-10-20"},
+      {"id": 2, "userId": 1, "title": "Report 2", "content": "Dolor sit amet", "dateCreated": "2023-10-21"},
+      {"id": 3, "userId": 2, "title": "Report 3", "content": "Consectetur adipiscing", "dateCreated": "2023-10-22"},
+      {"id": 4, "userId": 3, "title": "Report 4", "content": "Pellentesque habitant", "dateCreated": "2023-10-23"},
+      {"id": 5, "userId": 3, "title": "Report 5", "content": "Morbi tristique", "dateCreated": "2023-10-24"},
+      {"id": 6, "userId": 4, "title": "Report 6", "content": "Fusce consectetur", "dateCreated": "2023-10-25"},
+      {"id": 7, "userId": 5, "title": "Report 7", "content": "Sed eu justo", "dateCreated": "2023-10-26"},
+      {"id": 8, "userId": 6, "title": "Report 8", "content": "Vivamus eu turpis", "dateCreated": "2023-10-27"},
+      {"id": 9, "userId": 7, "title": "Report 9", "content": "Etiam ut quam", "dateCreated": "2023-10-28"},
+      {"id": 10, "userId": 8, "title": "Report 10", "content": "Nullam vel sem", "dateCreated": "2023-10-29"}
+    ]
+  }
+  
