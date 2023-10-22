@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
+import UserService from '../services/UserService';
 
 function UserDetails() {
+
     const { id } = useParams();
 
     const [user, setUser] = useState(null);
@@ -9,14 +11,15 @@ function UserDetails() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`http://localhost:8080/users/${id}`)
-            .then(response => response.json())
-            .then(data => setUser(data));
+        const fetchData = async () => {
+            const data = await Promise.all([UserService.fetchUserById(id), UserService.fetchUserReportById(id)]);
+            const [user, reports] = data;
+            setUser(user)
+            setUserReports(reports)
+        }
 
-        fetch(`http://localhost:8080/reports?userId=${id}`)
-            .then(response => response.json())
-            .then(data => setUserReports(data));
-    }, []);
+        fetchData()
+    }, [id]);
 
     return (
         <div>

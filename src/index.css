@@ -67,7 +67,7 @@ h2 {
 }
 
 .main-content {
-  padding-left: 12px;
+  padding: 0 12px;
 }
 
 .main-content ul::-webkit-scrollbar {
@@ -90,4 +90,14 @@ h2 {
   border-bottom: 1px solid #ccc;
   font-size: 18px;
   padding: 12px 0;
+}
+
+
+.reports-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.reports-header label {
+  margin-right: 8px;
 }
