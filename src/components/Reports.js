@@ -1,9 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import UserService from '../services/UserService';
+import { FixedSizeList as List } from 'react-window';
 
 function Reports() {
   let [reports, setReports] = useState([]);
   let [users, setUsers] = useState([]);
+
+  const ReportRow = ({ index, isScrolling, style, data }) => {
+    const report = data[index];
+    return (
+      <div className='report-item' style={style}>
+        {isScrolling ? <span>LOADING...</span> : report.title}
+      </div>
+    );
+  };
+
 
   useEffect(() => {
     const fetchReports = async () => {
@@ -41,11 +52,17 @@ function Reports() {
           </select>
         </div>
       </div>
-      <ul>
-        {reports.map(report => (
-          <li key={report.id}>{report.title}</li>
-        ))}
-      </ul>
+
+      <List
+        useIsScrolling
+        height={450}
+        itemCount={reports.length}
+        itemSize={35}
+        itemData={reports}
+        className="report-wrapper"
+      >
+        {ReportRow}
+      </List>
     </div>
   );
 }
