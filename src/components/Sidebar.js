@@ -22,7 +22,6 @@ function Sidebar() {
         </NavLink>
       </nav>
     </aside>
-
   );
 }
 

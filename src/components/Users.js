@@ -6,13 +6,10 @@ import { getUsers } from '../redux/actions/userAction';
 
 
 function Users() {
-  console.log('UserJs Iinit');
-
-  const content = useSelector((state) => state.userReducer);
-  const dispatch = useDispatch();
+  //const content = useSelector((state) => state.userReducer);
+  //const dispatch = useDispatch();
 
   const [users, setUsers] = useState([]);
-
   useEffect(() => {
     const fetchUsers = async () => {
       const users = await UserService.fetchUsers();

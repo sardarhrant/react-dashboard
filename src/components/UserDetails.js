@@ -3,9 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import UserService from '../services/UserService';
 
 function UserDetails() {
-
     const { id } = useParams();
-
     const [user, setUser] = useState(null);
     const [userReports, setUserReports] = useState(null);
     const navigate = useNavigate();

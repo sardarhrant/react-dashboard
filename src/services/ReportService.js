@@ -14,7 +14,6 @@ class ReportService {
     }
 
     static deleteReport = async (id) => {
-        debugger
         const data = await fetch(`${this.API_ENDPOINT}/${id}`, {
             method: 'DELETE',
             headers: {
@@ -26,7 +25,6 @@ class ReportService {
     }
 
     static updateReport = async (id, newReport) => {
-        debugger
         const data = await fetch(`${this.API_ENDPOINT}/${id}`, {
             method: 'PUT',
             headers: {

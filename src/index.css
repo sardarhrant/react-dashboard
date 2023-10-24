@@ -212,17 +212,7 @@ h2 {
   margin-top: 12px;
 }
 
-.add-record button {
-  background: #2e4c1e;
-  border: none;
-  padding: 8px;
-  color: #fff;
-  border-radius: 2px;
-  font-size: 14px;
-}
-
 .add-record-controls select {
-  height: 30px;
   margin-left: 18px;
   width: 200px;
 }
