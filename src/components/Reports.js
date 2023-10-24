@@ -217,7 +217,7 @@ function Reports() {
 
       <List
         useIsScrolling
-        height={444}
+        height={390}
         itemCount={reports.length}
         itemSize={170}
         itemData={reports.map(report => ({ ...report, isEditable: false }))}
