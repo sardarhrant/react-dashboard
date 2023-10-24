@@ -10,7 +10,7 @@ function Dashboard() {
     return (
         <div className="dashboard">
             <div className='header'>
-                <img src='https://engineerinc.io/wp-content/uploads/2023/03/60ed90a5ea27957b1f3c231f_logo-transparentbg-color-small-p-500.png' />
+                <img src='https://engineerinc.io/wp-content/uploads/2023/03/60ed90a5ea27957b1f3c231f_logo-transparentbg-color-small-p-500.png' alt='logo' />
             </div>
             <main id='main'>
                 <Router>

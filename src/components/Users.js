@@ -16,7 +16,6 @@ function Users() {
   useEffect(() => {
     const fetchUsers = async () => {
       const users = await UserService.fetchUsers();
-      console.log(users);
       setUsers(users)
     }
 

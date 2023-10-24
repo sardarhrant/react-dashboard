@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function Sidebar() {
   return (
@@ -21,17 +21,6 @@ function Sidebar() {
           )}
         </NavLink>
       </nav>
-      {/* <ul>
-        <li>
-          <Link to="/users">Users</Link>
-        </li>
-        <li>
-          <Link to="/reports">Reports</Link>
-        </li>
-        <li>
-          <Link to="/analytics">Analytics</Link>
-        </li>
-      </ul> */}
     </aside>
 
   );
