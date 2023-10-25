@@ -7,6 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body #webpack-dev-server-client-overlay {
+  display: none !important;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -253,4 +257,28 @@ h2 {
   align-items: center;
   color: #fff;
   min-height: 100px;
+}
+
+.error-boundary {
+  background-color: #ffcccc;
+  border: 1px solid #ff6666;
+  padding: 40px;
+  border-radius: 4px;
+  text-align: center;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.error-boundary p {
+  margin: 0;
+}
+
+.error-boundary pre {
+  color: #ff3333;
+  font-weight: bold;
+  font-size: 18px;
+
 }

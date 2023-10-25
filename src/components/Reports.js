@@ -5,6 +5,7 @@ import ReportService from '../services/ReportService';
 import Select from './styled-components/select';
 import Button from './styled-components/button';
 import ReportRow from './ReportRow';
+import { useErrorBoundary } from "react-error-boundary";
 
 function Reports() {
   let [reports, setReports] = useState([]);
@@ -13,6 +14,7 @@ function Reports() {
   const [reportTitle, setReportTitle] = useState('');
   const [reportContent, setReportContent] = useState('');
   const [reportUser, setReportUser] = useState('anonymous');
+  const { showBoundary } = useErrorBoundary();
 
   const formRef = useRef(null);
 
@@ -77,6 +79,7 @@ function Reports() {
       const report = await response.json();
       setReports(prevReports => [...prevReports, report]);
     } catch (error) {
+      showBoundary(error);
       console.error('Error adding report:', error);
     }
   };

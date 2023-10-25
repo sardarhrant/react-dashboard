@@ -1,8 +1,10 @@
 import React, { useState, useRef } from 'react';
 import ReportService from '../services/ReportService';
 import Button from './styled-components/button';
+import { useErrorBoundary } from "react-error-boundary";
 
 const ReportRow = ({ index, isScrolling, style, data, updateReport, deleteReport }) => {
+    const { showBoundary } = useErrorBoundary();
     const report = data[index];
     const [isEditable, setIsEditable] = useState(false);
     const [editedTitle, setEditedTitle] = useState('');
@@ -42,6 +44,7 @@ const ReportRow = ({ index, isScrolling, style, data, updateReport, deleteReport
             console.log('Report deleted successfully');
             deleteReport(id);
         } catch (error) {
+            showBoundary(error);
             console.error('Error deleting report:', error);
         }
     }
@@ -77,6 +80,7 @@ const ReportRow = ({ index, isScrolling, style, data, updateReport, deleteReport
                 )
             );
         } catch (error) {
+            showBoundary(error);
             console.error('Error updating report:', error);
         }
 
