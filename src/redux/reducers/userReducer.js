@@ -1,19 +1,34 @@
-import { FETCH_USERS } from "../constant";
+import { FETCH_USERS_FAILURE, FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS } from "../constant";
 
 const initialState = {
-    reports: [],
     users: [],
-    error: null
+    fetching: false,
+    error: null,
+    usersLoaded: false,
 };
 
-export function userReducer(state = initialState, action) {
+export function usersReducer(state = initialState, action) {
     switch (action.type) {
-        case FETCH_USERS:
-            return { ...state, fetching: false, users: action.users };
-        // case FETCH_USERS_SUCCESS:
-        //     return { ...state, fetching: false, users: action.users };
-        // case FETCH_USERS_FAILURE:
-        //     return { ...state, fetching: false, users: [], error: action.error };
+        case FETCH_USERS_REQUEST:
+            return {
+                ...state,
+                fetching: true,
+                error: null,
+            };
+        case FETCH_USERS_SUCCESS:
+            return {
+                ...state,
+                fetching: false,
+                users: action.payload,
+                error: null,
+                usersLoaded: true,
+            };
+        case FETCH_USERS_FAILURE:
+            return {
+                ...state,
+                fetching: false,
+                error: action.payload,
+            };
         default:
             return state;
     }

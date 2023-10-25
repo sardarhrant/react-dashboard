@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
+import UserService from '../services/UserService';
+import { fetchReportsSuccess } from '../redux/actions/reportActions';
 
 
 const CustomTooltip = ({ active, payload, labels }) => {
@@ -18,15 +21,18 @@ const CustomTooltip = ({ active, payload, labels }) => {
 
 
 function Analytics() {
-  const [reports, setReports] = useState([]);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  const dispatch = useDispatch();
+  const reports = useSelector(state => state.reportsReducer.reports);
+  const reportsLoaded = useSelector(state => state.reportsReducer.reportsLoaded);
+
   useEffect(() => {
-    fetch('http://localhost:8080/reports')
-      .then(response => response.json())
-      .then(data => {
-        setReports(data)
+    if (!reportsLoaded) {
+      UserService.fetchReports().then(reports => {
+        dispatch(fetchReportsSuccess(reports));
       });
+    }
 
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -38,7 +44,7 @@ function Analytics() {
       window.removeEventListener('resize', handleResize);
     };
 
-  }, []);
+  }, [dispatch]);
 
   const monthlyReportCounts = {};
   reports.forEach(report => {
@@ -86,4 +92,10 @@ function Analytics() {
   );
 };
 
-export default Analytics;
+const mapStateToProps = state => {
+  return {
+    reports: state.reportsReducer.reports,
+  };
+};
+
+export default connect(mapStateToProps)(Analytics);

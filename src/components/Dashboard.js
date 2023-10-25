@@ -5,8 +5,10 @@ import Reports from './Reports';
 import Analytics from './Analytics';
 import UserDetails from './UserDetails';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function Dashboard() {
+    const usersLoaded = useSelector(state => state.reportsReducer.usersLoaded);
     return (
         <div className="dashboard">
             <div className='header'>

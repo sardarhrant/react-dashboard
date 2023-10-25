@@ -1,23 +1,45 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
 import UserService from '../services/UserService';
+import { useDispatch, useSelector } from 'react-redux';
+import { useErrorBoundary } from "react-error-boundary";
+import { fetchUsersSuccess } from '../redux/actions/userActions';
+import { fetchReportsSuccess } from '../redux/actions/reportActions';
 
 function UserDetails() {
     const { id } = useParams();
-    const [user, setUser] = useState(null);
-    const [userReports, setUserReports] = useState(null);
     const navigate = useNavigate();
 
+    const usersLoaded = useSelector(state => state.usersReducer.usersLoaded);
+    const reportsLoaded = useSelector(state => state.reportsReducer.reportsLoaded);
+    let users = useSelector(state => state.usersReducer.users);
+    console.log(users);
+    const reports = useSelector(state => state.reportsReducer.reports);
+    const { showBoundary } = useErrorBoundary();
+    const dispatch = useDispatch();
+
+    const user = users?.find(user => user.id === +id);
+    const userReports = reports.filter(report => report.userId === +id);
+
     useEffect(() => {
-        const fetchData = async () => {
-            const data = await Promise.all([UserService.fetchUserById(id), UserService.fetchUserReportById(id)]);
-            const [user, reports] = data;
-            setUser(user)
-            setUserReports(reports)
+        if (!usersLoaded) {
+            UserService.fetchUsers()
+                .then(users => {
+                    dispatch(fetchUsersSuccess(users));
+                })
+                .catch(error => {
+                    showBoundary(error)
+                });
         }
 
-        fetchData()
-    }, [id]);
+        if (!reportsLoaded) {
+            UserService.fetchReports().then(reports => {
+                dispatch(fetchReportsSuccess(reports));
+            }).catch(error => {
+                showBoundary(error)
+            });
+        }
+    }, [id, usersLoaded]);
 
     return (
         <div>

@@ -6,16 +6,20 @@ import Select from './styled-components/select';
 import Button from './styled-components/button';
 import ReportRow from './ReportRow';
 import { useErrorBoundary } from "react-error-boundary";
+import { useDispatch, useSelector, connect } from 'react-redux';
+import { fetchReportsSuccess, filterReportsByUser } from '../redux/actions/reportActions';
+import { fetchUsersSuccess } from '../redux/actions/userActions';
 
 function Reports() {
-  let [reports, setReports] = useState([]);
-  let [users, setUsers] = useState([]);
-
+  const dispatch = useDispatch();
+  const users = useSelector(state => state.usersReducer.users);
+  const reports = useSelector(state => state.reportsReducer.filteredReports || state.reportsReducer.reports);
+  const usersLoaded = useSelector(state => state.usersReducer.usersLoaded);
+  const reportsLoaded = useSelector(state => state.reportsReducer.reportsLoaded);
   const [reportTitle, setReportTitle] = useState('');
   const [reportContent, setReportContent] = useState('');
   const [reportUser, setReportUser] = useState('anonymous');
   const { showBoundary } = useErrorBoundary();
-
   const formRef = useRef(null);
 
   const handleReportTitleChange = (e) => {
@@ -29,25 +33,22 @@ function Reports() {
   }
 
   useEffect(() => {
-    const fetchReports = async () => {
-      const fetchedReports = await UserService.fetchReports();
-      const fetchedUsers = await UserService.fetchUsers();
-      setUsers(fetchedUsers);
-      setReports(fetchedReports);
+    if (!reportsLoaded) {
+      UserService.fetchReports().then(reports => {
+        dispatch(fetchReportsSuccess(reports));
+      });
     }
 
-    fetchReports();
-  }, []);
-
-  const handleUserChange = async (event) => {
-    const userId = event.target.value;
-    if (userId === 'all') {
-      reports = await UserService.fetchReports();
-      setReports(reports);
-    } else {
-      const reports = await UserService.fetchUserReportById(userId);
-      setReports(reports);
+    if (!usersLoaded) {
+      UserService.fetchUsers().then(users => {
+        dispatch(fetchUsersSuccess(users));
+      });
     }
+  }, [dispatch, usersLoaded, reportsLoaded]);
+
+  const handleUserChange = (event) => {
+    const userId = +event.target.value || 'all';
+    dispatch(filterReportsByUser(userId));
   };
 
   const handleAddUserChange = (event) => {
@@ -69,7 +70,7 @@ function Reports() {
     };
 
     try {
-      const response = await ReportService.addReport(newReport)
+      const response = await ReportService.addReport(newReport);
 
       if (!response.ok) {
         throw new Error('Failed to add report');
@@ -125,8 +126,6 @@ function Reports() {
             style={style}
             data={data}
             isEditable={data[index].isEditable}
-            updateReport={setReports}
-            deleteReport={(id) => setReports(prevReports => prevReports.filter(report => report.id !== id))}
           />
         )}
       </List>
@@ -165,4 +164,11 @@ function Reports() {
   );
 }
 
-export default Reports;
+const mapStateToProps = state => {
+  return {
+    users: state.usersReducer.users,
+    reports: state.reportsReducer.reports,
+  };
+};
+
+export default connect(mapStateToProps)(Reports);

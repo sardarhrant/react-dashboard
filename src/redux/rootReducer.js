@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import { userReducer } from "./reducers/userReducer";
-import { fetchReports } from "./reducers/reportReducer";
+import { usersReducer } from "./reducers/userReducer";
+import { reportsReducer } from "./reducers/reportsReducer";
 
 export default combineReducers({
-    userReducer,
-    fetchReports
+    usersReducer,
+    reportsReducer
 });

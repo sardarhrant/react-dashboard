@@ -2,8 +2,10 @@ import React, { useState, useRef } from 'react';
 import ReportService from '../services/ReportService';
 import Button from './styled-components/button';
 import { useErrorBoundary } from "react-error-boundary";
+import { useDispatch, useSelector, connect } from 'react-redux';
+import { deleteReportFailure, deleteReportSuccess, updateReportFailure, updateReportSuccess } from '../redux/actions/reportActions';
 
-const ReportRow = ({ index, isScrolling, style, data, updateReport, deleteReport }) => {
+const ReportRow = ({ index, isScrolling, style, data }) => {
     const { showBoundary } = useErrorBoundary();
     const report = data[index];
     const [isEditable, setIsEditable] = useState(false);
@@ -11,6 +13,7 @@ const ReportRow = ({ index, isScrolling, style, data, updateReport, deleteReport
     const [editedContent, setEditedContent] = useState('');
     const titleRef = useRef(null);
     const contentRef = useRef(null);
+    const dispatch = useDispatch();
 
     const toggleEdit = () => {
         setIsEditable(prev => !prev);
@@ -33,18 +36,19 @@ const ReportRow = ({ index, isScrolling, style, data, updateReport, deleteReport
         return formattedDate;
     };
 
-    const deleteReportById = async (id) => {
+    const deleteReportById = async (reportId) => {
         try {
-            const response = await ReportService.deleteReport(id)
+            const response = await ReportService.deleteReport(reportId)
 
             if (!response.ok) {
                 throw new Error('Failed to delete report');
             }
 
             console.log('Report deleted successfully');
-            deleteReport(id);
+            dispatch(deleteReportSuccess(reportId));
         } catch (error) {
             showBoundary(error);
+            dispatch(deleteReportFailure(error.message));
             console.error('Error deleting report:', error);
         }
     }
@@ -59,7 +63,7 @@ const ReportRow = ({ index, isScrolling, style, data, updateReport, deleteReport
         const title = titleRef.current.value;
         const content = contentRef.current.value;
 
-        const newReport = {
+        const updatedReport = {
             ...report,
             title: editedTitle || title,
             content: editedContent || content,
@@ -67,20 +71,17 @@ const ReportRow = ({ index, isScrolling, style, data, updateReport, deleteReport
         };
 
         try {
-            const response = await ReportService.updateReport(report.id, updateReport)
+            const response = await ReportService.updateReport(report.id, updatedReport)
 
             if (!response.ok) {
                 throw new Error('Failed to update report');
             }
 
             console.log('Report updated successfully');
-            updateReport(prevReports =>
-                prevReports.map(prevReport =>
-                    prevReport.id === report.id ? newReport : prevReport
-                )
-            );
+            dispatch(updateReportSuccess(updatedReport));
         } catch (error) {
             showBoundary(error);
+            dispatch(updateReportFailure(error.message));
             console.error('Error updating report:', error);
         }
 

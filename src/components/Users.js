@@ -1,23 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom/dist';
 import UserService from '../services/UserService';
-import { useDispatch, useSelector } from 'react-redux';
-import { getUsers } from '../redux/actions/userAction';
+import { useDispatch, useSelector, connect } from 'react-redux';
+import { fetchUsersSuccess } from '../redux/actions/userActions';
 
 
 function Users() {
-  //const content = useSelector((state) => state.userReducer);
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const users = useSelector(state => state.usersReducer.users);
+  const usersLoaded = useSelector(state => state.usersReducer.usersLoaded);
 
-  const [users, setUsers] = useState([]);
   useEffect(() => {
-    const fetchUsers = async () => {
-      const users = await UserService.fetchUsers();
-      setUsers(users)
+    if (!usersLoaded) {
+      UserService.fetchUsers().then(users => {
+        dispatch(fetchUsersSuccess(users))
+      });
     }
-
-    fetchUsers();
-  }, []);
+  }, [dispatch, usersLoaded]);
 
   return (
     <div className="users">
@@ -35,4 +34,10 @@ function Users() {
   );
 }
 
-export default Users;
+const mapStateToProps = state => {
+  return {
+    users: state.userReducer,
+  };
+};
+
+export default connect(mapStateToProps)(Users);
