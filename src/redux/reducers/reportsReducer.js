@@ -1,4 +1,7 @@
 import {
+    CREATE_REPORT_FAILURE,
+    CREATE_REPORT_REQUEST,
+    CREATE_REPORT_SUCCESS,
     DELETE_REPORT_FAILURE,
     DELETE_REPORT_REQUEST,
     DELETE_REPORT_SUCCESS,
@@ -20,6 +23,21 @@ const initialState = {
 
 export function reportsReducer(state = initialState, action) {
     switch (action.type) {
+        case CREATE_REPORT_REQUEST:
+            return {
+                ...state,
+                fetching: true,
+            }
+        case CREATE_REPORT_SUCCESS:
+            return {
+                ...state,
+                reports: [...state.reports, action.payload],
+            }
+        case CREATE_REPORT_FAILURE:
+            return {
+                ...state,
+                error: action.payload,
+            };
         case FETCH_REPORTS_REQUEST:
             return {
                 ...state,
@@ -32,7 +50,6 @@ export function reportsReducer(state = initialState, action) {
                 fetching: false,
                 reports: action.payload,
                 error: null,
-                reportsLoaded: true,
             };
         case FETCH_REPORTS_FAILURE:
             return {

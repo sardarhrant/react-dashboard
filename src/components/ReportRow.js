@@ -1,9 +1,13 @@
 import React, { useState, useRef } from 'react';
-import ReportService from '../services/ReportService';
 import Button from './styled-components/button';
 import { useErrorBoundary } from "react-error-boundary";
-import { useDispatch, useSelector, connect } from 'react-redux';
-import { deleteReportFailure, deleteReportSuccess, updateReportFailure, updateReportSuccess } from '../redux/actions/reportActions';
+import { useDispatch } from 'react-redux';
+import {
+    deleteReportFailure,
+    deleteReportRequest,
+    updateReportFailure,
+    updateReportRequest
+} from '../redux/actions/reportActions';
 
 const ReportRow = ({ index, isScrolling, style, data }) => {
     const { showBoundary } = useErrorBoundary();
@@ -38,19 +42,16 @@ const ReportRow = ({ index, isScrolling, style, data }) => {
 
     const deleteReportById = async (reportId) => {
         try {
-            const response = await ReportService.deleteReport(reportId)
-
-            if (!response.ok) {
-                throw new Error('Failed to delete report');
-            }
-
-            console.log('Report deleted successfully');
-            dispatch(deleteReportSuccess(reportId));
+            dispatch(deleteReportRequest(reportId));
         } catch (error) {
             showBoundary(error);
             dispatch(deleteReportFailure(error.message));
-            console.error('Error deleting report:', error);
         }
+    }
+
+    const saveWithError = () => {
+        showBoundary({ message: `Error deleting report with id: ${report.id}` });
+        throw new Error('Save Failed')
     }
 
     const editReport = async () => {
@@ -71,14 +72,8 @@ const ReportRow = ({ index, isScrolling, style, data }) => {
         };
 
         try {
-            const response = await ReportService.updateReport(report.id, updatedReport)
-
-            if (!response.ok) {
-                throw new Error('Failed to update report');
-            }
-
             console.log('Report updated successfully');
-            dispatch(updateReportSuccess(updatedReport));
+            dispatch(updateReportRequest(updatedReport));
         } catch (error) {
             showBoundary(error);
             dispatch(updateReportFailure(error.message));
@@ -103,17 +98,33 @@ const ReportRow = ({ index, isScrolling, style, data }) => {
                     }}
                 />
 
-                {isEditable && <Button
-                    onClick={toggleEdit}
-                    text="Cancel"
-                    style={{
-                        backgroundColor: '#ffc107',
-                        fontSize: '16px',
-                        padding: '4px 6px',
-                        borderRadius: '3px',
-                        color: '#fff',
-                    }}
-                />
+                {isEditable && (
+                    <>
+                        <Button
+                            onClick={toggleEdit}
+                            text="Cancel"
+                            style={{
+                                backgroundColor: '#ffc107',
+                                fontSize: '16px',
+                                padding: '4px 6px',
+                                borderRadius: '3px',
+                                color: '#fff',
+                            }}
+                        />
+
+                        <Button
+                            onClick={saveWithError}
+                            text="Save with Error"
+                            style={{
+                                backgroundColor: 'rgb(247 111 124)',
+                                fontSize: '16px',
+                                padding: '4px 6px',
+                                borderRadius: '3px',
+                                color: '#fff',
+                            }}
+                        />
+                    </>
+                )
                 }
 
                 <Button

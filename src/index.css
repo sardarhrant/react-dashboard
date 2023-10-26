@@ -145,7 +145,7 @@ h2 {
 
 .report-item-controls {
   display: flex;
-  width: 180px;
+  width: 330px;
   justify-content: flex-end;
   position: absolute;
   right: 5px;

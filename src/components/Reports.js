@@ -7,7 +7,7 @@ import Button from './styled-components/button';
 import ReportRow from './ReportRow';
 import { useErrorBoundary } from "react-error-boundary";
 import { useDispatch, useSelector, connect } from 'react-redux';
-import { fetchReportsRequest, fetchReportsSuccess, filterReportsByUser } from '../redux/actions/reportActions';
+import { createReportRequest, fetchReportsRequest, fetchReportsSuccess, filterReportsByUser } from '../redux/actions/reportActions';
 import { fetchUsersRequest, fetchUsersSuccess } from '../redux/actions/userActions';
 
 function Reports() {
@@ -59,22 +59,15 @@ function Reports() {
 
     const newReport = {
       id: reportUniqueId,
-      userId: reportUser,
+      userId: +reportUser,
       title: reportTitle,
       content: reportContent,
       dateCreated: Date.now()
     };
 
     try {
-      const response = await ReportService.addReport(newReport);
-
-      if (!response.ok) {
-        throw new Error('Failed to add report');
-      }
-
+      dispatch(createReportRequest(newReport));
       console.log('Report added successfully');
-      const report = await response.json();
-      // setReports(prevReports => [...prevReports, report]);
     } catch (error) {
       showBoundary(error);
       console.error('Error adding report:', error);

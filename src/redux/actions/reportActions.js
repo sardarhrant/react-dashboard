@@ -7,8 +7,32 @@ import {
     UPDATE_REPORT_SUCCESS,
     UPDATE_REPORT_FAILURE,
     FILTER_REPORTS_BY_USER,
-    FETCH_REPORTS_REQUEST
+    FETCH_REPORTS_REQUEST,
+    CREATE_REPORT_REQUEST,
+    CREATE_REPORT_SUCCESS,
+    CREATE_REPORT_FAILURE
 } from "../constant";
+
+export const createReportRequest = (newReport) => {
+    return {
+        type: CREATE_REPORT_REQUEST,
+        payload: newReport,
+    };
+};
+
+export const createReportSuccess = (newReport) => {
+    return {
+        type: CREATE_REPORT_SUCCESS,
+        payload: newReport,
+    };
+};
+
+export const createReportFailure = (error) => {
+    return {
+        type: CREATE_REPORT_FAILURE,
+        payload: error,
+    };
+};
 
 export const fetchReportsRequest = () => {
     return {
@@ -30,9 +54,10 @@ export const fetchReportsFailure = (error) => {
     };
 };
 
-export const deleteReportRequest = () => {
+export const deleteReportRequest = (reportId) => {
     return {
         type: DELETE_REPORT_REQUEST,
+        payload: reportId
     };
 };
 
@@ -50,9 +75,10 @@ export const deleteReportFailure = (error) => {
     };
 };
 
-export const updateReportRequest = () => {
+export const updateReportRequest = (updatedReport) => {
     return {
         type: UPDATE_REPORT_REQUEST,
+        payload: updatedReport
     };
 };
 

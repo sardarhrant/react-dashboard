@@ -15,18 +15,20 @@ class ReportService {
             body: JSON.stringify(newReport),
         });
 
-        return data;
+        return data.json();
     }
 
     static deleteReport = async (id) => {
-        const data = await fetch(`${this.API_ENDPOINT}/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            }
+        const response = await fetch(`${this.API_ENDPOINT}/${id}`, {
+            method: 'DELETE'
         });
 
-        return data;
+        if (response.statusText === 'OK') {
+            return id
+        } else {
+            throw new Error('Report does not exists');
+        }
+
     }
 
     static updateReport = async (id, newReport) => {
@@ -38,7 +40,7 @@ class ReportService {
             body: JSON.stringify(newReport),
         });
 
-        return data;
+        return data.json();
     }
 }
 
