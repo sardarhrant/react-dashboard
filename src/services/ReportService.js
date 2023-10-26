@@ -1,6 +1,11 @@
 class ReportService {
     static API_ENDPOINT = 'http://localhost:8080/reports';
 
+    static fetchReports = async () => {
+        const data = await fetch(`${this.API_ENDPOINT}`);
+        return data.json();
+    }
+
     static addReport = async (newReport) => {
         const data = await fetch(this.API_ENDPOINT, {
             method: 'POST',

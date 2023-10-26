@@ -6,12 +6,13 @@ import {
     UPDATE_REPORT_REQUEST,
     UPDATE_REPORT_SUCCESS,
     UPDATE_REPORT_FAILURE,
-    FILTER_REPORTS_BY_USER
+    FILTER_REPORTS_BY_USER,
+    FETCH_REPORTS_REQUEST
 } from "../constant";
 
 export const fetchReportsRequest = () => {
     return {
-        type: 'FETCH_REPORTS_REQUEST',
+        type: FETCH_REPORTS_REQUEST,
     };
 };
 

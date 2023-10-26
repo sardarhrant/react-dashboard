@@ -14,7 +14,7 @@ export function usersReducer(state = initialState, action) {
                 ...state,
                 fetching: true,
                 error: null,
-            };
+            }
         case FETCH_USERS_SUCCESS:
             return {
                 ...state,
@@ -22,13 +22,13 @@ export function usersReducer(state = initialState, action) {
                 users: action.payload,
                 error: null,
                 usersLoaded: true,
-            };
+            }
         case FETCH_USERS_FAILURE:
             return {
                 ...state,
                 fetching: false,
                 error: action.payload,
-            };
+            }
         default:
             return state;
     }

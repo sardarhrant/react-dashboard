@@ -7,8 +7,8 @@ import Button from './styled-components/button';
 import ReportRow from './ReportRow';
 import { useErrorBoundary } from "react-error-boundary";
 import { useDispatch, useSelector, connect } from 'react-redux';
-import { fetchReportsSuccess, filterReportsByUser } from '../redux/actions/reportActions';
-import { fetchUsersSuccess } from '../redux/actions/userActions';
+import { fetchReportsRequest, fetchReportsSuccess, filterReportsByUser } from '../redux/actions/reportActions';
+import { fetchUsersRequest, fetchUsersSuccess } from '../redux/actions/userActions';
 
 function Reports() {
   const dispatch = useDispatch();
@@ -34,15 +34,11 @@ function Reports() {
 
   useEffect(() => {
     if (!reportsLoaded) {
-      UserService.fetchReports().then(reports => {
-        dispatch(fetchReportsSuccess(reports));
-      });
+      dispatch(fetchReportsRequest());
     }
 
     if (!usersLoaded) {
-      UserService.fetchUsers().then(users => {
-        dispatch(fetchUsersSuccess(users));
-      });
+      dispatch(fetchUsersRequest());
     }
   }, [dispatch, usersLoaded, reportsLoaded]);
 
@@ -78,7 +74,7 @@ function Reports() {
 
       console.log('Report added successfully');
       const report = await response.json();
-      setReports(prevReports => [...prevReports, report]);
+      // setReports(prevReports => [...prevReports, report]);
     } catch (error) {
       showBoundary(error);
       console.error('Error adding report:', error);
@@ -116,7 +112,7 @@ function Reports() {
         height={390}
         itemCount={reports.length}
         itemSize={170}
-        itemData={reports.map(report => ({ ...report, isEditable: false }))}
+        itemData={reports?.map(report => ({ ...report, isEditable: false }))}
         className="report-wrapper"
       >
         {({ index, isScrolling, style, data }) => (

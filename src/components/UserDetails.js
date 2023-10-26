@@ -13,7 +13,6 @@ function UserDetails() {
     const usersLoaded = useSelector(state => state.usersReducer.usersLoaded);
     const reportsLoaded = useSelector(state => state.reportsReducer.reportsLoaded);
     let users = useSelector(state => state.usersReducer.users);
-    console.log(users);
     const reports = useSelector(state => state.reportsReducer.reports);
     const { showBoundary } = useErrorBoundary();
     const dispatch = useDispatch();

@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom/dist';
-import UserService from '../services/UserService';
 import { useDispatch, useSelector, connect } from 'react-redux';
-import { fetchUsersSuccess } from '../redux/actions/userActions';
+import { fetchUsersRequest } from '../redux/actions/userActions';
 
 
 function Users() {
@@ -12,9 +11,7 @@ function Users() {
 
   useEffect(() => {
     if (!usersLoaded) {
-      UserService.fetchUsers().then(users => {
-        dispatch(fetchUsersSuccess(users))
-      });
+      dispatch(fetchUsersRequest());
     }
   }, [dispatch, usersLoaded]);
 

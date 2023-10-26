@@ -7,10 +7,7 @@ export const fetchUsersRequest = () => {
 };
 
 export const fetchUsersSuccess = (users) => {
-    return {
-        type: FETCH_USERS_SUCCESS,
-        payload: users,
-    };
+    return { type: FETCH_USERS_SUCCESS, payload: users }
 };
 
 export const fetchUsersFailure = (error) => {
