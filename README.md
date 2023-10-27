@@ -14,6 +14,13 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
+### `npm run server`
+It will run json-server on http://localhost:8080
+and will provide 2 apis
+http://localhost:8080/users
+http://localhost:8080/reports
+with their CRUD functionality
+
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.\
