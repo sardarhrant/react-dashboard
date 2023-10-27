@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
-import { fetchReportsSuccess } from '../redux/actions/reportActions';
-import ReportService from '../services/ReportService';
+import { fetchReportsSuccess } from '../../redux/actions/reportActions';
+import ReportService from '../../services/ReportService';
 
 
 const CustomTooltip = ({ active, payload, labels }) => {
@@ -44,7 +44,7 @@ function Analytics() {
       window.removeEventListener('resize', handleResize);
     };
 
-  }, [dispatch]);
+  }, [dispatch, reportsLoaded]);
 
   const monthlyReportCounts = {};
   reports.forEach(report => {

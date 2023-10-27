@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Dashboard from './components/Dashboard';
 import { Provider } from "react-redux";
 import store from './redux/store';
 import { ErrorBoundary } from 'react-error-boundary';
 import Button from './components/styled-components/button';
+import Dashboard from './components/DashboardModule/Dashboard';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 

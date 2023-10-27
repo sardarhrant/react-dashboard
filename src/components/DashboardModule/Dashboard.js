@@ -1,14 +1,13 @@
 import React from 'react';
-import Sidebar from './Sidebar';
-import Users from './Users';
-import Reports from './Reports';
-import Analytics from './Analytics';
-import UserDetails from './UserDetails';
+import Sidebar from '../SidebarModule/Sidebar';
+import Users from '../UserModule/Users';
+import Analytics from '../AnalyticsModule/Analytics';
+import Reports from '../ReportModule/Reports';
+import UserDetails from '../UserModule/UserDetails';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import './Dashboard.css';
 
 function Dashboard() {
-    const usersLoaded = useSelector(state => state.reportsReducer.usersLoaded);
     return (
         <div className="dashboard">
             <div className='header'>

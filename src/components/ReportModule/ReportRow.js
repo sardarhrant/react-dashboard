@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import Button from './styled-components/button';
+import Button from '../styled-components/button';
 import { useErrorBoundary } from "react-error-boundary";
 import { useDispatch } from 'react-redux';
 import {
@@ -7,7 +7,8 @@ import {
     deleteReportRequest,
     updateReportFailure,
     updateReportRequest
-} from '../redux/actions/reportActions';
+} from '../../redux/actions/reportActions';
+import './ReportRows.css';
 
 const ReportRow = ({ index, isScrolling, style, data }) => {
     const { showBoundary } = useErrorBoundary();

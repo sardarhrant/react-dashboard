@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom/dist';
 import { useDispatch, useSelector, connect } from 'react-redux';
-import { fetchUsersRequest } from '../redux/actions/userActions';
+import { fetchUsersRequest } from '../../redux/actions/userActions';
+import './Users.css';
 
 
 function Users() {

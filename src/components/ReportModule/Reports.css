@@ -1,0 +1,58 @@
+.reports-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.reports-header label {
+    margin-right: 8px;
+}
+
+.report-wrapper {
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+
+.loading-report {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 200px;
+}
+
+.editable-textArea {
+    width: 100%;
+    resize: none;
+    box-sizing: border-box;
+}
+
+.edit-controls input,
+.edit-controls textarea {
+    padding: 5px;
+}
+
+.add-record {
+    margin-top: 15px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.add-record textarea {
+    margin-top: 12px;
+}
+
+.add-record textarea,
+.add-record input {
+    padding: 5px;
+}
+
+.add-record-controls {
+    margin-top: 12px;
+}
+
+.add-record-controls select {
+    margin-left: 18px;
+    width: 200px;
+}

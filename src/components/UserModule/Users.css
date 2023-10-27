@@ -1,0 +1,33 @@
+.main-content {
+    padding-left: 12px;
+}
+
+.main-content {
+    padding: 0;
+}
+
+.main-content {
+    padding: 0 12px;
+}
+
+.main-content ul::-webkit-scrollbar {
+    display: none;
+}
+
+.main-content ul {
+    padding: 0;
+    height: 422px;
+    overflow-y: scroll;
+
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.main-content ul li {
+    list-style: none;
+    border-bottom: 1px solid #ccc;
+    font-size: 18px;
+    padding: 12px 0;
+}

@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import UserService from '../services/UserService';
 import { FixedSizeList as List } from 'react-window';
-import ReportService from '../services/ReportService';
-import Select from './styled-components/select';
-import Button from './styled-components/button';
+import Select from '../styled-components/select';
+import Button from '../styled-components/button';
 import ReportRow from './ReportRow';
 import { useErrorBoundary } from "react-error-boundary";
 import { useDispatch, useSelector, connect } from 'react-redux';
-import { createReportRequest, fetchReportsRequest, fetchReportsSuccess, filterReportsByUser } from '../redux/actions/reportActions';
-import { fetchUsersRequest, fetchUsersSuccess } from '../redux/actions/userActions';
+import { createReportRequest, fetchReportsRequest, filterReportsByUser } from '../../redux/actions/reportActions';
+import { fetchUsersRequest } from '../../redux/actions/userActions';
+import './Reports.css'
 
 function Reports() {
   const dispatch = useDispatch();
