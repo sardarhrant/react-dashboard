@@ -88,7 +88,7 @@ function Reports() {
     <div className="reports">
       <div className="reports-header">
         <h2>Reports</h2>
-        <div>
+        <div className="filter-reports">
           <label htmlFor="user-select">Filter by user</label>
           <Select
             id='user-select'
@@ -142,7 +142,6 @@ function Reports() {
         </div>
         <textarea
           rows="4"
-          cols="50"
           id="report-content"
           type="text"
           placeholder='Report Content'

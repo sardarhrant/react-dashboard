@@ -32,7 +32,6 @@
 
 .report-item-controls {
     display: flex;
-    width: 330px;
     justify-content: flex-end;
     position: absolute;
     right: 5px;
@@ -79,4 +78,44 @@
 /* Handle on hover */
 .report-wrapper::-webkit-scrollbar-thumb:hover {
     background: rgb(0, 192, 13);
+}
+
+.row-container {
+    max-height: 100px;
+    overflow: hidden;
+}
+
+.row-container p {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    /* Limit the content to 3 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media only screen and (max-width: 768px) {
+    .report-item-controls {
+        position: initial;
+        justify-content: start;
+        margin-bottom: 5px;
+    }
+
+    .report-item-controls button:nth-of-type(1) {
+        margin-left: 0;
+    }
+
+    .row-container p {
+        -webkit-line-clamp: 3
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .reports .reports-header {
+        display: block;
+    }
+
+    .reports-header .filter-reports {
+        display: block;
+    }
 }

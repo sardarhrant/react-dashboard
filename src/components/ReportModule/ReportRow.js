@@ -143,7 +143,9 @@ const ReportRow = ({ index, isScrolling, style, data }) => {
             {!isEditable
                 ? <>
                     {isScrolling ? <span className='loading-report'>LOADING...</span> : report.title}
-                    {!isScrolling && <p>{report?.content}</p>}
+                    <div className="row-container">
+                        {!isScrolling && <p>{report?.content}</p>}
+                    </div>
                 </>
                 :
                 <div className='edit-controls'>

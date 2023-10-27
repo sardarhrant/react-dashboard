@@ -72,7 +72,7 @@ function Analytics() {
   return (
     <>
       <h2>Monthly Reports</h2>
-      <BarChart width={windowWidth - 440} height={300} data={userChartData}>
+      <BarChart width={windowWidth - 150} height={300} data={userChartData}>
         <Bar dataKey="reportsCount" fill="red" />
         <CartesianGrid stroke="#ccc" />
         <XAxis dataKey="userId" />
@@ -81,7 +81,7 @@ function Analytics() {
       </BarChart>
 
       <h2>User Reports</h2>
-      <BarChart width={windowWidth - 440} height={300} data={monthlyChartData}>
+      <BarChart width={windowWidth - 150} height={300} data={monthlyChartData}>
         <Bar dataKey="reportsCount" fill="blue" />
         <CartesianGrid stroke="#ccc" />
         <XAxis dataKey="monthYear" />

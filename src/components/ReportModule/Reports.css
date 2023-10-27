@@ -41,6 +41,8 @@
 
 .add-record textarea {
     margin-top: 12px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .add-record textarea,
@@ -54,5 +56,17 @@
 
 .add-record-controls select {
     margin-left: 18px;
-    width: 200px;
+    width: 160px;
+}
+
+@media only screen and (max-width: 480px) {
+    .add-record-controls select {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    #report-title {
+        width: 100%;
+        box-sizing: border-box;
+    }
 }
