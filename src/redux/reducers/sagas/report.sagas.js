@@ -3,7 +3,7 @@ import { createReportFailure, createReportSuccess, deleteReportFailure, deleteRe
 import { CREATE_REPORT_REQUEST, DELETE_REPORT_REQUEST, FETCH_REPORTS_REQUEST, UPDATE_REPORT_REQUEST } from '../../constant';
 import ReportService from '../../../services/ReportService';
 
-function* fetchReports(action) {
+export function* fetchReports(action) {
     try {
         const reports = yield call(ReportService.fetchReports, action.payload);
         yield put(fetchReportsSuccess(reports));
@@ -16,7 +16,7 @@ export function* reportsSaga() {
     yield takeLatest(FETCH_REPORTS_REQUEST, fetchReports);
 }
 
-function* createReport(action) {
+export function* createReport(action) {
     try {
         const newReport = yield call(ReportService.addReport, action.payload);
         yield put(createReportSuccess(newReport));
@@ -29,7 +29,7 @@ export function* createReportSaga() {
     yield takeLatest(CREATE_REPORT_REQUEST, createReport);
 }
 
-function* deleteReport(action) {
+export function* deleteReport(action) {
     try {
         const response = yield call(ReportService.deleteReport, action.payload);
         yield put(deleteReportSuccess(response));
@@ -43,7 +43,7 @@ export function* deleteReportSaga() {
 }
 
 
-function* updateReport(action) {
+export function* updateReport(action) {
     try {
         const response = yield call(ReportService.updateReport, action.payload.id, action.payload);
         yield put(updateReportSuccess(response));

@@ -9,14 +9,18 @@ const StyledSelect = styled.select`
   margin: ${(props) => props.margin || '5px 0'};
 `;
 
-const Select = ({ id, options, onChange, defaultValue }) => {
+const Select = ({ id, options, onChange, defaultValue, label }) => {
     return (
-        <StyledSelect id={id} onChange={onChange} defaultValue={defaultValue}>
-            {options.map(option => (
-                <option value={option.value} key={option.value}>{option.label}</option>
-            ))}
-        </StyledSelect>
+        <div>
+            <label htmlFor={id}>{label}</label>
+            <StyledSelect id={id} onChange={onChange} defaultValue={defaultValue}>
+                {options.map(option => (
+                    <option value={option.value} key={option.value}>{option.label}</option>
+                ))}
+            </StyledSelect>
+        </div>
     );
 }
+
 
 export default Select;

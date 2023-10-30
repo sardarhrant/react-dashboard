@@ -3,7 +3,7 @@ import { fetchUsersFailure, fetchUsersSuccess } from '../../actions/userActions'
 import UserService from '../../../services/UserService';
 import { FETCH_USERS_REQUEST } from '../../constant';
 
-function* fetchUser(action) {
+export function* fetchUser(action) {
     try {
         const users = yield call(UserService.fetchUsers, action.payload);
         yield put(fetchUsersSuccess(users));
