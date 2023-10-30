@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 import { fetchReportsSuccess } from '../../redux/actions/reportActions';
@@ -21,11 +21,11 @@ const CustomTooltip = ({ active, payload, labels }) => {
 
 
 function Analytics() {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
   const dispatch = useDispatch();
   const reports = useSelector(state => state.reportsReducer.reports);
   const reportsLoaded = useSelector(state => state.reportsReducer.reportsLoaded);
+  const chartContentRef = useRef(null);
+  const [barCharttWidth, setBarCharttWidth] = useState(null);
 
   useEffect(() => {
     if (!reportsLoaded) {
@@ -34,8 +34,17 @@ function Analytics() {
       });
     }
 
+    const measureElement = () => {
+      if (chartContentRef.current) {
+        const width = chartContentRef.current.offsetWidth;
+        setBarCharttWidth(width);
+      }
+    };
+
+    measureElement();
+
     const handleResize = () => {
-      setWindowWidth(window.innerWidth);
+      measureElement();
     };
 
     window.addEventListener('resize', handleResize);
@@ -43,7 +52,6 @@ function Analytics() {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-
   }, [dispatch, reportsLoaded]);
 
   const monthlyReportCounts = {};
@@ -70,9 +78,9 @@ function Analytics() {
 
 
   return (
-    <>
+    <div ref={chartContentRef}>
       <h2>Monthly Reports</h2>
-      <BarChart width={windowWidth - 150} height={300} data={userChartData}>
+      <BarChart width={barCharttWidth - 20} height={300} data={userChartData}>
         <Bar dataKey="reportsCount" fill="red" />
         <CartesianGrid stroke="#ccc" />
         <XAxis dataKey="userId" />
@@ -81,14 +89,14 @@ function Analytics() {
       </BarChart>
 
       <h2>User Reports</h2>
-      <BarChart width={windowWidth - 150} height={300} data={monthlyChartData}>
+      <BarChart width={barCharttWidth - 20} height={300} data={monthlyChartData}>
         <Bar dataKey="reportsCount" fill="blue" />
         <CartesianGrid stroke="#ccc" />
         <XAxis dataKey="monthYear" />
         <YAxis />
         <Tooltip content={<CustomTooltip labels={[{ dataKey: 'monthYear', label: 'Month Year' }, { dataKey: 'reportsCount', label: 'Report Count' }]} />} />
       </BarChart>
-    </>
+    </div>
   );
 };
 

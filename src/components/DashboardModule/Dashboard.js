@@ -18,7 +18,7 @@ function Dashboard() {
                     <div className='sidebar'>
                         <Sidebar />
                     </div>
-                    <div className='main'>
+                    <div id='main-content' className='main'>
                         <div className="main-content">
                             <Routes>
                                 <Route path="/users" element={<Users />} />
