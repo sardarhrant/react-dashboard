@@ -47,11 +47,9 @@
 
 .add-record textarea,
 .add-record input {
-    padding: 5px;
-}
-
-.add-record-controls {
-    margin-top: 12px;
+    padding: 10px 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
 }
 
 .add-record-controls select {
@@ -59,9 +57,23 @@
     width: 160px;
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 768px) {
     .add-record-controls select {
         margin-left: 0;
+        width: 100%;
+    }
+
+    .add-record-controls *,
+    .add-record button {
+        box-sizing: border-box;
+        width: 100%;
+        margin: 0;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+
+    .add-record-controls select {
         width: 100%;
     }
 

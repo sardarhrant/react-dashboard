@@ -201,7 +201,7 @@ describe('Reports Reducer', () => {
         const userId = 1;
         const action = { type: FILTER_REPORTS_BY_USER, payload: userId };
         const newState = reportsReducer(initialState, action);
-        const filteredReports = initialState.reports.filter(report => report.userId === userId)
+        const filteredReports = initialState.reports.filter(report => report.userId === userId);
         expect(newState).toEqual({
             ...initialState,
             filteredReports: filteredReports,

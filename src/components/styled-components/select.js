@@ -11,14 +11,14 @@ const StyledSelect = styled.select`
 
 const Select = ({ id, options, onChange, defaultValue, label }) => {
     return (
-        <div>
+        <>
             <label htmlFor={id}>{label}</label>
             <StyledSelect id={id} onChange={onChange} defaultValue={defaultValue}>
                 {options.map(option => (
                     <option value={option.value} key={option.value}>{option.label}</option>
                 ))}
             </StyledSelect>
-        </div>
+        </>
     );
 }
 

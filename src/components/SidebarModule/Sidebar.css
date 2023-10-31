@@ -1,12 +1,7 @@
 #sidebar {
     background-color: #282A35;
-    height: calc(100vh - 70px);
-
-}
-
-#sidebar {
+    height: 100vh;
     list-style: none;
-
 }
 
 #sidebar a {

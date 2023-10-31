@@ -119,18 +119,6 @@ function Reports() {
       </List>
 
       <form className='add-record' ref={formRef}>
-        <Button
-          onClick={addReport}
-          text="Add New Report"
-          style={{
-            backgroundColor: 'green',
-            fontSize: '16px',
-            padding: '10px',
-            borderRadius: '3px',
-            color: 'white',
-            cursorPointer: "pointer"
-          }}
-        />
         <div className='add-record-controls'>
           <input onChange={handleReportTitleChange} id="report-title" type="text" placeholder='Report Title' />
           <Select
@@ -146,6 +134,19 @@ function Reports() {
           type="text"
           placeholder='Report Content'
           onChange={handleReportContentChange} />
+        <Button
+          onClick={addReport}
+          text="Add New Report"
+          style={{
+            backgroundColor: 'green',
+            fontSize: '16px',
+            padding: '10px',
+            borderRadius: '3px',
+            color: 'white',
+            cursorPointer: "pointer",
+            margin: "10px 0 0"
+          }}
+        />
       </form>
     </div>
   );
